@@ -1,0 +1,36 @@
+@startuml sequence diagram van teleporteer methode
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+actor Speler
+participant Spel as "spel:Spel"
+participant Bob as "k:Karakter"
+participant Bord as "bord:Spelbord"
+participant oudVakje as "oudVakje:Vakje"
+
+Speler -> Spel ++: teleporteer(naam:String, i:int)
+activate Speler
+Spel --> Spel: k = getKarakter(naam:String)
+Spel -> Bord ++: v = getVakjes().get(i:int)
+return v
+deactivate Bord
+Spel -> Bob ++: oudVakje = getVakje()
+return oudVakje
+deactivate Bob
+Spel -> oudVakje ++: verwijderKarakter()
+deactivate oudVakje
+Spel -> Bob ++: setVakje(v)
+deactivate oudVakje
+deactivate Bob
+deactivate Spel
+
+@enduml

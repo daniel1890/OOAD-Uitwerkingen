@@ -1,0 +1,51 @@
+@startuml sequence diagram methode wisselVakje
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+actor Speler
+participant Spel as "spel:Spel"
+participant Bob as "k1:Karakter"
+participant Alice as "k2:Karakter"
+participant Bord as "bord:Spelbord"
+participant oudVakje as "oudVakje:Vakje"
+participant nieuwVakje as "nieuwVakje:Vakje"
+
+Speler -> Spel ++: wisselVakje(naam:String, vaknNr:int)
+activate Speler
+Spel --> Spel: k1 = getKarakter(naam:String)
+Spel -> Bob ++: oudVakje = getVakje()
+return oudVakje
+Spel -> Bord ++: nieuwVakje = getVakjes().get(i:int)
+return nieuwVakje
+Spel -> nieuwVakje ++: getKarakter()
+return k2
+Spel -> Bob++: getEnergie()
+return energie
+deactivate Bob
+opt k1.energie >= 20
+    Spel -> nieuwVakje++:verwijderKarakter()
+    Spel -> nieuwVakje:setKarakter(k1:Karakter)
+    deactivate nieuwVakje
+    Spel -> oudVakje++:verwijderKarakter()
+    Spel -> Alice++:setVakje(oudVakje:Vakje)
+    deactivate Alice
+    Spel -> oudVakje: setKarakter(k2:Karakter)
+    deactivate oudVakje
+    Spel -> Bob++: setEnergie(nieuweEnergie:int)
+    deactivate Bob
+
+
+end
+
+deactivate Bob
+deactivate Spel
+@enduml
