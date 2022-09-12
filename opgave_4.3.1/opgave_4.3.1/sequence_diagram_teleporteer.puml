@@ -13,9 +13,10 @@ skinparam stereotypeCBackgroundColor YellowGreen
 
 actor Speler
 participant Spel as "spel:Spel"
-participant Bob as "k:Karakter"
 participant Bord as "bord:Spelbord"
+participant Bob as "k:Karakter"
 participant oudVakje as "oudVakje:Vakje"
+participant nieuwVakje as "nieuwVakje:Vakje"
 
 Speler -> Spel ++: teleporteer(naam:String, i:int)
 activate Speler
@@ -29,7 +30,7 @@ deactivate Bob
 Spel -> oudVakje ++: verwijderKarakter()
 deactivate oudVakje
 Spel -> Bob ++: setVakje(v)
-deactivate oudVakje
+Bob -> nieuwVakje --++: setKarakter(k:Karakter)
 deactivate Bob
 deactivate Spel
 

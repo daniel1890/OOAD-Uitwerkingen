@@ -33,17 +33,14 @@ return energie
 deactivate Bob
 opt k1.energie >= 20
     Spel -> nieuwVakje++:verwijderKarakter()
-    Spel -> nieuwVakje:setKarakter(k1:Karakter)
+    Spel -> Bob ++:setVakje(nieuwVakje:Vakje)
+    Bob -> nieuwVakje --:setKarakter(k1:Karakter)
     deactivate nieuwVakje
     Spel -> oudVakje++:verwijderKarakter()
-    Spel -> Alice++:setVakje(oudVakje:Vakje)
-    deactivate Alice
-    Spel -> oudVakje: setKarakter(k2:Karakter)
+    Spel -> Alice ++:setVakje(oudVakje:Vakje)
+    Alice -> oudVakje --:setKarakter(k2:Karakter)
     deactivate oudVakje
-    Spel -> Bob++: setEnergie(nieuweEnergie:int)
-    deactivate Bob
-
-
+    deactivate Spel
 end
 
 deactivate Bob

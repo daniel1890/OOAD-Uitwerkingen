@@ -34,10 +34,8 @@ public class Spel {
         if(k1.getEnergie() >= 20) {
             nieuwVakje.verwijderKarakter();
             k1.setVakje(nieuwVakje);
-            nieuwVakje.setKarakter(k1);
             oudVakje.verwijderKarakter();
             k2.setVakje(oudVakje);
-            oudVakje.setKarakter(k2);
             k1.setEnergie(k1.getEnergie() - 20);
         }
     }

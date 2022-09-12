@@ -6,7 +6,7 @@ public class Karakter {
     public Karakter(String naam) {
         this.naam = naam;
         this.energie = 1000;
-        vervoermiddel = new Vervoermiddel();
+        this.vervoermiddel = new Vervoermiddel();
     }
     public Vakje getVakje () {
         return vakje;
@@ -15,7 +15,7 @@ public class Karakter {
         return naam;
     }
     public void setVakje(Vakje v) {
-        vakje = v;
+        this.vakje = v;
         v.setKarakter(this);
     }
 
