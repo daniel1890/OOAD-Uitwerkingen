@@ -1,0 +1,60 @@
+@startuml class-diagram AdventureQuest
+'https://plantuml.com/class-diagram
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+class Karakter {
+-naam : String
+-energie : int
+-vakje : Vakje
+-vervoermiddel : Vervoermiddel
++getVakje() : Vakje
++getNaam() : String
++setVakje() : void
++getEnergie() : int
++setEnergie(energie:int) : void
+}
+
+class Spel {
+-karakters : ArrayList<Karakter>
+-bord : Spelbord
++meldAan(naamKarakter:String) : void
++getKarakter(naam:String) : Karakter
++teleporteer(naam:String, i:int) : void
++wisselVakje(naam:String,i:int) : void
+}
+
+class Spelbord {
+-vakjes : ArrayList<Vakje>
+-maakVakjes() : void
+-kiesVrijVakje() : Vakje
++getVakjes() : ArrayList<Vakje>
++plaatsOpVrijVakje(k:Karakter) : void
+}
+
+class Vakje {
+-karakter : Karakter
+-vaknr : int
++setVaknr(vaknr : int)
++getVaknr() : int
++setKarakter(k:Karakter) : void
++getKarakter() : Karakter
++verwijderKarakter() : void
+}
+
+class Vervoermiddel {
+}
+
+Spel "1" --> "1" Spelbord : wordt gespeeld op >
+Spelbord "1" --> "*" Vakje : bestaat uit >
+Spel "1" o-- "0..*" Karakter : speelt in <
+Karakter "1" -- "1" Vervoermiddel : heeft een >
+Karakter "0..1" o--o "0..1" Vakje : staat op >
+@enduml
