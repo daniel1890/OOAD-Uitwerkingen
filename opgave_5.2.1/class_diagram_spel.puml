@@ -1,0 +1,38 @@
+@startuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+class Spel {
++wisselVakje(naamKarakter:String, doelVak:int) : void
+
+}
+
+class Spelbord {
+}
+
+class Karakter {
+-naam : String
+-energie : int
+}
+
+class Vakje {
+}
+
+class Vervoermiddel {
+}
+
+Spel "1" --> "1" Spelbord
+Spel "1" --> "0..*" Karakter
+Spelbord "1" *-- "1..*" Vakje
+Karakter "0..*" -- "1" Vakje
+Karakter "0..1" -- "1" Vervoermiddel
+Spelbord .> Karakter
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+@startuml sequence diagram van teleporteer methode
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+actor Speler
+participant Spel as "spel:Spel"
+participant Bord as "bord:Spelbord"
+participant Bob as "k:Karakter"
+participant Alice as "k2:Karakter"
+participant v1 as "v1:Vakje"
+participant v2 as "v2:Vakje"
+
+Speler -> Spel ++: wisselVakje(naam:String, doelVak:Vakje)
+Spel --> Spel ++--: k = getKarakter(naam:String)
+Spel -> Bord ++:wisselVakje(k1:Karakter, doelVak:Vakje)
+Bord --> Bord ++--: v2 = getVakje(doelVak:Vakje)
+Bord -> Bob ++ : wisselVakje(v2:Vakje)
+deactivate Bord
+opt energie >= 20
+    Bob -> v2 ++ : k2 = getKarakter()
+    return k2
+    Bob -> Alice ++: setVakje(v1:Vakje)
+    Alice -> v1 --: setKarakter(k2:Karakter)
+    activate v1
+    Bob -> Bob ++--: setVakje(v2:Vakje)
+    deactivate v1
+    Bob -> v2 : setKarakter(k1:Karakter)
+    activate v2
+    Bob -> Bob ++--: verminderEnergie(20)
+    deactivate v2
+
+end
+@enduml
