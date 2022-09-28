@@ -1,6 +1,8 @@
 public class Vakje {
     private Karakter karakter;
     private int vaknr;
+    private int xPositie;
+    private int yPositie;
 
     public void setVaknr(int vaknr) {
         this.vaknr = vaknr;
