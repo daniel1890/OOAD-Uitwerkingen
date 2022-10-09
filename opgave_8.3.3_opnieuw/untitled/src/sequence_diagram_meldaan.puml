@@ -1,0 +1,33 @@
+@startuml sequence diagram methode meldAan
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor Gray
+skinparam stereotypeCBackgroundColor YellowGreen
+
+actor Speler
+participant Spel as "spel:Spel"
+participant Bob as "k1:Karakter"
+participant Bord as "bord:Spelbord"
+participant Vakje as "v:Vakje"
+participant Garage as "garage:Garage"
+participant Vervoermiddel as "vm:Vervoermiddel"
+
+Speler -> Spel ++: meldAan(naam)
+Spel -> Bob ** : <<create>> \n create(naam)
+Spel -> Garage ++: voegVervoermiddelToe(k1)
+Garage -> Vervoermiddel ** : <<create>>
+Garage -> Bob --++: verkrijgNieuwVervoermiddel(vm)
+Spel -> Spel ++--: voegKarakterToe(k1)
+deactivate Bob
+Spel -> Bord --++: plaatsOpVrijVakje(k1)
+Bord -> Bord ++ : v = kiesVrijVakje()
+Bord -> Bob --++ : setVakje(v)
+
+@enduml

@@ -1,14 +1,14 @@
-import java.io.PrintStream;
+import Vervoermiddelen.IVervoermiddel;
 
 public class Karakter {
     private String naam;
     private int energie;
     private Vakje vakje;
-    private Vervoermiddel vervoermiddel;
-    public Karakter(String naam, Vervoermiddel vervoermiddel) {
+    private IVervoermiddel vervoermiddel;
+    public Karakter(String naam, String vervoermiddel) {
         this.naam = naam;
         this.energie = 1000;
-        this.vervoermiddel = vervoermiddel;
+        this.vervoermiddel = Garage.verkrijgNieuwVervoermiddel(vervoermiddel);
     }
     public Vakje getVakje () {
         return vakje;
@@ -47,7 +47,7 @@ public class Karakter {
         int vakjeAfstand = k2.getVakje().berekenVakjeAfstand(this.getVakje().getVaknr());
 
         if(vakjeAfstand >= -1 && vakjeAfstand <= 1) {
-            Vervoermiddel tussenVervoermiddel = this.getVervoermiddel();
+            IVervoermiddel tussenVervoermiddel = this.getVervoermiddel();
             this.setVervoermiddel(k2.getVervoermiddel());
             k2.setVervoermiddel(tussenVervoermiddel);
         }
@@ -64,11 +64,11 @@ public class Karakter {
         this.energie = energie;
     }
 
-    public Vervoermiddel getVervoermiddel() {
+    public IVervoermiddel getVervoermiddel() {
         return vervoermiddel;
     }
 
-    public void setVervoermiddel(Vervoermiddel vervoermiddel) {
+    public void setVervoermiddel(IVervoermiddel vervoermiddel) {
         this.vervoermiddel = vervoermiddel;
     }
 }

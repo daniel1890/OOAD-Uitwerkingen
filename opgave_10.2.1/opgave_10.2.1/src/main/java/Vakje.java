@@ -22,9 +22,7 @@ public class Vakje {
     public Karakter getKarakter() {
         return karakter;
     }
-
     public int berekenVakjeAfstand(int vaknr) {
         return this.vaknr - vaknr;
     }
-
 }

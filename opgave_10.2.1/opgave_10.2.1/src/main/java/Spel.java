@@ -11,8 +11,8 @@ public class Spel {
         this.bord = new Spelbord();
         this.garage = new Garage();
     }
-    public void meldAan (String naamKarakter) {
-        Karakter k = new Karakter(naamKarakter, garage.verkrijgNieuwVervoermiddel(naamKarakter));
+    public void meldAan (String naamKarakter, String vervoermiddel) {
+        Karakter k = new Karakter(naamKarakter, vervoermiddel);
         voegKarakterToe(k);
         bord.plaatsOpVrijVakje(k);
     }

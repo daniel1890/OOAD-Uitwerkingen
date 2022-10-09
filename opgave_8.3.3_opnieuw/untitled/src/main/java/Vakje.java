@@ -26,5 +26,4 @@ public class Vakje {
     public int berekenVakjeAfstand(int vaknr) {
         return this.vaknr - vaknr;
     }
-
 }

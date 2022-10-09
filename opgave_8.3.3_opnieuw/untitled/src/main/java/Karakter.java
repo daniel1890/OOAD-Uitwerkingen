@@ -1,5 +1,3 @@
-import java.io.PrintStream;
-
 public class Karakter {
     private String naam;
     private int energie;

@@ -1,0 +1,48 @@
+@startuml sequence diagram methode teleporteer
+'https://plantuml.com/sequence-diagram
+skinparam style strictuml
+skinparam class {
+BackgroundColor LightGrey
+ArrowColor Black
+BorderColor Black
+BackgroundColor<<Foo>> DarkGrey
+}
+
+skinparam backgroundcolor White
+skinparam stereotypeCBackgroundColor YellowGreen
+
+actor Speler
+participant Spel as "spel:Spel"
+participant k1 as "k1:Karakter"
+participant k2 as "k2:Karakter"
+participant Bord as "bord:Spelbord"
+participant ver1Vakje as "ver1Vakje:Vakje"
+participant ver2Vakje as "ver2Vakje:Vakje"
+participant ver1 as "ver1:Vervoermiddel"
+participant ver2 as "ver2:Vervoermiddel"
+
+Speler -> Spel ++: ruilVervoermiddel(naamKar1, naamKar2)
+Spel -> Spel ++-- : k1 = getKarakter(naamKar1)
+Spel -> Spel ++-- : k2 = getKarakter((naamKar2)
+Spel -> k1 --++ : ruilVervoermiddel(k2)
+k1 -> ver1Vakje ++ : vakjeAfstand = berekenVakjeAfstand(ver2Vakje)
+ver1Vakje -> ver2Vakje ++-- : getVakjeNr()
+deactivate ver1Vakje
+deactivate ver2Vakje
+opt vakjeAfstand >= -1 && vakjeAfstand <= 1
+    k1 -> ver1  ++: setVervoermiddel(k2)
+    ver1 -> ver2 ++ : nieuwVer = getVervoermiddel()
+    deactivate ver2
+    ver1 -> ver1 ++--: setVervoermiddel(nieuwVer)
+    deactivate ver1
+    k1 -> k2 --++: setVervoermiddel(k1)
+    k2 -> ver2 --++: setVervoermiddel(k1)
+    ver2 -> ver1 ++ : nieuwVer = getVervoermiddel()
+    deactivate ver1
+    ver2 -> ver2 ++-- : setVervoermiddel(nieuwVer)
+
+end
+
+
+
+@enduml
